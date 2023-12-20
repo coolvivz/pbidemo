@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="CV_SBOOK" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="CV_SBOOK"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="SBOOK">
+    <resourceUri>SBOOK</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:AggregationView" id="Aggregation_1">
+    <viewAttributes>
+      <viewAttribute id="CARRID"/>
+      <viewAttribute id="CONNID"/>
+      <viewAttribute id="CUSTOMID"/>
+      <viewAttribute id="LOCCURAM" aggregationType="sum"/>
+      <viewAttribute id="LOCCURKEY"/>
+      <viewAttribute id="AGENCYNUM"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="SBOOK"/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Aggregation_1">
+  <attributes>
+    <attribute id="CARRID" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CARRID"/>
+      <keyMapping columnObjectName="Aggregation_1" columnName="CARRID"/>
+    </attribute>
+    <attribute id="CONNID" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CONNID"/>
+      <keyMapping columnObjectName="Aggregation_1" columnName="CONNID"/>
+    </attribute>
+    <attribute id="CUSTOMID" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CUSTOMID"/>
+      <keyMapping columnObjectName="Aggregation_1" columnName="CUSTOMID"/>
+    </attribute>
+    <attribute id="LOCCURKEY" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="LOCCURKEY"/>
+      <keyMapping columnObjectName="Aggregation_1" columnName="LOCCURKEY"/>
+    </attribute>
+    <attribute id="AGENCYNUM_1" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="AGENCYNUM"/>
+      <keyMapping columnObjectName="Aggregation_1" columnName="AGENCYNUM"/>
+    </attribute>
+    <attribute id="AGENCYNUM$local">
+      <descriptions defaultDescription="AGENCYNUM"/>
+      <keyMapping columnObjectName="Aggregation_1" columnName="AGENCYNUM"/>
+    </attribute>
+    <attribute id="CUSTOMID$local">
+      <descriptions defaultDescription="CUSTOMID"/>
+      <keyMapping columnObjectName="Aggregation_1" columnName="CUSTOMID"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="LOCCURAM" order="4" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="LOCCURAM"/>
+      <measureMapping columnObjectName="Aggregation_1" columnName="LOCCURAM"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+  <sharedDimensions>
+    <logicalJoin associatedObjectUri="AGENCY">
+      <attributes>
+        <attributeRef>AGENCYNUM$local</attributeRef>
+      </attributes>
+      <associatedAttributeNames>
+        <attributeName>AGENCYNUM</attributeName>
+      </associatedAttributeNames>
+      <properties cardinality="CN_1" joinType="leftOuter" joinOperator="Equal"/>
+      <associatedAttributeFeatures/>
+    </logicalJoin>
+    <logicalJoin associatedObjectUri="customer">
+      <attributes>
+        <attributeRef>CUSTOMID$local</attributeRef>
+      </attributes>
+      <associatedAttributeNames>
+        <attributeName>ID</attributeName>
+      </associatedAttributeNames>
+      <properties cardinality="CN_1" joinType="leftOuter" joinOperator="Equal"/>
+      <associatedAttributeFeatures>
+        <attributeReference alias="NAME_1" attributeName="NAME"/>
+        <attributeReference alias="COUNTRY_1" attributeName="COUNTRY"/>
+      </associatedAttributeFeatures>
+    </logicalJoin>
+  </sharedDimensions>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="100" y="105"/>
+    
+      <rectangleSize width="160"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Aggregation_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="12" y="240"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Aggregation_1" modelObjectNameSpace="StarJoinViewNodeInput" modelObjectType="repository">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="AGENCY" modelObjectNameSpace="StarJoinViewNodeSharedCV" modelObjectType="repository">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="157.50537109375"/>
+    </shape>
+    <shape modelObjectName="customer" modelObjectNameSpace="StarJoinViewNodeSharedCV" modelObjectType="repository">
+      <upperLeftCorner x="-167" y="40"/>
+      <rectangleSize width="144.673828125"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

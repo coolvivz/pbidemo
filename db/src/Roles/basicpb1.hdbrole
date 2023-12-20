@@ -1,0 +1,13 @@
+{
+  "role": {
+    "name": "basicpb1",
+    "schema_privileges": [
+      {
+        "privileges": [
+          "SELECT",
+          "EXECUTE"
+        ]
+      }
+    ]
+  }
+}
